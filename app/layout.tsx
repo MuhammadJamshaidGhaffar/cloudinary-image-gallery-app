@@ -2,6 +2,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Sidebar } from "./SideBar";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,12 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="">
-      <body className={`${inter.className} bg-black text-white`}>
+    <html lang="en" className="dark">
+      <body className={`${inter.className}`}>
         <div className="hidden flex-col md:flex">
           <div className="border-b">
             <div className="flex h-16 items-center px-4 container mx-auto">
-              Image Gallery Appx
+              <Link href="/">Image Gallery App</Link>
               <div className="ml-auto flex items-center space-x-4">
                 <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" />
@@ -31,7 +33,11 @@ export default function RootLayout({
             </div>
           </div>
         </div>
-        {children}
+        <div className="w-full flex">
+          <Sidebar />
+
+          <div className="w-full px-4 pt-12">{children}</div>
+        </div>
       </body>
     </html>
   );
