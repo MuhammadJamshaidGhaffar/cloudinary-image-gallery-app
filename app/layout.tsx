@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -15,8 +16,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="bg-black text-white">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="">
+      <body className={`${inter.className} bg-black text-white`}>
+        <div className="hidden flex-col md:flex">
+          <div className="border-b">
+            <div className="flex h-16 items-center px-4 container mx-auto">
+              Image Gallery Appx
+              <div className="ml-auto flex items-center space-x-4">
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </div>
+            </div>
+          </div>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
