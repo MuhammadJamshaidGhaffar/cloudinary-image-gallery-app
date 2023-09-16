@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { CldImage } from "next-cloudinary";
 import HeartIcon from "@/components/icons/HeartIcon";
 import { useTransition } from "react";
-import { setAsFavouriteAction } from "./actions";
-import type { SearchResult } from "./page";
+import { setAsFavouriteAction } from "../app/gallery/actions";
+import type { SearchResult } from "../app/gallery/page";
 import FullHeartIcon from "@/components/icons/FullHeartIcon";
 import { FunctionOrConstructorTypeNode } from "typescript";
+import { ImageMenu } from "./ImageMenu";
 
 export default function CloudinaryImage(props: {
   imageData: SearchResult;
@@ -30,7 +31,7 @@ export default function CloudinaryImage(props: {
       />
       {isFavourited ? (
         <FullHeartIcon
-          className="absolute top-2 right-2 hover:text-white text-red-600 cursor-pointer"
+          className="absolute top-2 left-2 hover:text-white text-red-600 cursor-pointer"
           onClick={async () => {
             // startTransition(() => {
             await setAsFavouriteAction(imageData.public_id, false);
@@ -41,7 +42,7 @@ export default function CloudinaryImage(props: {
         />
       ) : (
         <HeartIcon
-          className="absolute top-2 right-2 hover:text-red-600 cursor-pointer"
+          className="absolute top-2 left-2 hover:text-red-600 cursor-pointer"
           onClick={async () => {
             // startTransition(() => {
             await setAsFavouriteAction(imageData.public_id, true);
@@ -51,6 +52,7 @@ export default function CloudinaryImage(props: {
           }}
         />
       )}
+      <ImageMenu imageData={imageData} />
     </div>
   );
 }

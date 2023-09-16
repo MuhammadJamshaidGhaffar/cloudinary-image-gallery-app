@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import type { SearchResult } from "./page";
-import CloudinaryImage from "../gallery/CloudinaryImage";
+import CloudinaryImage from "@/components/CloudinaryImage";
 import ImagesGrid from "@/components/ImagesGrid";
 
 export default function FavouritesElm({
@@ -32,11 +32,6 @@ export default function FavouritesElm({
           />
         )}
       />
-      {/* <div className="grid grid-cols-4 gap-4 mt-8">
-        {favouritesList.map((result) => (
-          
-        ))}
-      </div> */}
     </div>
   );
 }

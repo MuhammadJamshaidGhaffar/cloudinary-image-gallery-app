@@ -1,7 +1,7 @@
 import React from "react";
 import UploadButton from "./UploadButton";
 import cloudinary from "cloudinary";
-import CloudinaryImage from "./CloudinaryImage";
+import CloudinaryImage from "../../components/CloudinaryImage";
 import ImagesGrid from "@/components/ImagesGrid";
 
 export type SearchResult = {
@@ -31,12 +31,6 @@ export default async function Gallery() {
           <CloudinaryImage key={imageData.public_id} imageData={imageData} />
         )}
       />
-      {/* <div className="grid grid-cols-4 gap-4 mt-8">
-
-        {results.resources.map((result) => (
-          
-        ))}
-      </div> */}
     </section>
   );
 }
