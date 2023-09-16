@@ -4,16 +4,11 @@ import { revalidatePath } from "next/cache";
 
 export async function setAsFavouriteAction(
   publicId: string,
-  isFavourited: boolean,
-  path: string
+  favourite: boolean
 ) {
-  if (isFavourited) {
-    await cloudinary.v2.uploader.remove_tag("favourite", [publicId]);
-  } else {
+  if (favourite) {
     await cloudinary.v2.uploader.add_tag("favourite", [publicId]);
+  } else {
+    await cloudinary.v2.uploader.remove_tag("favourite", [publicId]);
   }
-  await new Promise((resolve) => {
-    setTimeout(resolve, 1000);
-  });
-  revalidatePath(path);
 }

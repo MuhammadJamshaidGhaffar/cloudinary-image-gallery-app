@@ -1,7 +1,7 @@
 import React from "react";
 import cloudinary from "cloudinary";
-import CloudinaryImage from "../gallery/CloudinaryImage";
 import ForceRefresh from "@/components/ForceRefresh";
+import FavouritesElm from "./FavouritesElm";
 
 export type SearchResult = {
   public_id: string;
@@ -20,18 +20,7 @@ export default async function Gallery() {
   return (
     <section>
       <ForceRefresh />
-      <div className="flex justify-between">
-        <h1 className="text-4xl font-bold">Favourite Images</h1>
-      </div>
-      <div className="grid grid-cols-4 gap-4 mt-8">
-        {results.resources.map((result) => (
-          <CloudinaryImage
-            key={result.public_id}
-            imageData={result}
-            path="/favourites"
-          />
-        ))}
-      </div>
+      <FavouritesElm resources={results.resources} />
     </section>
   );
 }

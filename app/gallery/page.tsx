@@ -25,11 +25,7 @@ export default async function Gallery() {
       </div>
       <div className="grid grid-cols-4 gap-4 mt-8">
         {results.resources.map((result) => (
-          <CloudinaryImage
-            key={result.public_id}
-            imageData={result}
-            path="/gallery"
-          />
+          <CloudinaryImage key={result.public_id} imageData={result} />
         ))}
       </div>
     </section>
