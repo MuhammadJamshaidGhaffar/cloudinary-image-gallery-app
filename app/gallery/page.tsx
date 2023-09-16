@@ -2,6 +2,7 @@ import React from "react";
 import UploadButton from "./UploadButton";
 import cloudinary from "cloudinary";
 import CloudinaryImage from "./CloudinaryImage";
+import ImagesGrid from "@/components/ImagesGrid";
 
 export type SearchResult = {
   public_id: string;
@@ -23,11 +24,19 @@ export default async function Gallery() {
         <h1 className="text-4xl font-bold">Gallery</h1>
         <UploadButton />
       </div>
-      <div className="grid grid-cols-4 gap-4 mt-8">
+      <ImagesGrid
+        max_columns={4}
+        images={results.resources}
+        getImageComponent={(imageData) => (
+          <CloudinaryImage key={imageData.public_id} imageData={imageData} />
+        )}
+      />
+      {/* <div className="grid grid-cols-4 gap-4 mt-8">
+
         {results.resources.map((result) => (
-          <CloudinaryImage key={result.public_id} imageData={result} />
+          
         ))}
-      </div>
+      </div> */}
     </section>
   );
 }
