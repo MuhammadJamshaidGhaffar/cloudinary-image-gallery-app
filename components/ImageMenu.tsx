@@ -13,11 +13,22 @@ import MenuIcon from "./icons/MenuIcon";
 import FolderPlusIcon from "./icons/FolderPlusIcon";
 import { AddToAlbumDialog } from "./AddToAlbumDialog";
 import { SearchResult } from "@/app/favourites/page";
+import { useState } from "react";
+import { FolderType } from "@/app/albums/page";
 
-export function ImageMenu({ imageData }: { imageData: SearchResult }) {
+export function ImageMenu({
+  imageData,
+  albumsList,
+  onAlbumChanged,
+}: {
+  imageData: SearchResult;
+  albumsList: FolderType[];
+  onAlbumChanged?: () => void;
+}) {
+  const [open, setOpen] = useState(false);
   return (
     <div className="absolute top-2 right-2">
-      <DropdownMenu>
+      <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <Button variant="secondary" size="icon">
             <MenuIcon />
@@ -25,7 +36,12 @@ export function ImageMenu({ imageData }: { imageData: SearchResult }) {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuItem asChild>
-            <AddToAlbumDialog imageData={imageData} />
+            <AddToAlbumDialog
+              imageData={imageData}
+              albumsList={albumsList}
+              onClose={() => setOpen(false)}
+              onAlbumChanged={onAlbumChanged}
+            />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

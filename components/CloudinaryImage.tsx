@@ -8,13 +8,16 @@ import type { SearchResult } from "../app/gallery/page";
 import FullHeartIcon from "@/components/icons/FullHeartIcon";
 import { FunctionOrConstructorTypeNode } from "typescript";
 import { ImageMenu } from "./ImageMenu";
+import { FolderType } from "@/app/albums/page";
 
 export default function CloudinaryImage(props: {
   imageData: SearchResult;
+  albumsList: FolderType[];
   onHeart?: () => void;
   onUnHeart?: () => void;
+  onAlbumChanged?: () => void;
 }) {
-  const { imageData } = props;
+  const { imageData, albumsList, onAlbumChanged } = props;
 
   const [transition, startTransition] = useTransition();
   const [isFavourited, setIsFavourited] = useState(
@@ -52,7 +55,11 @@ export default function CloudinaryImage(props: {
           }}
         />
       )}
-      <ImageMenu imageData={imageData} />
+      <ImageMenu
+        imageData={imageData}
+        albumsList={albumsList}
+        onAlbumChanged={onAlbumChanged}
+      />
     </div>
   );
 }

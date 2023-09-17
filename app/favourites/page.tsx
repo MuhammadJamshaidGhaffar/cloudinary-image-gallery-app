@@ -2,6 +2,7 @@ import React from "react";
 import cloudinary from "cloudinary";
 import ForceRefresh from "@/components/ForceRefresh";
 import FavouritesElm from "./FavouritesElm";
+import { FolderType } from "../albums/page";
 
 export type SearchResult = {
   public_id: string;
@@ -16,11 +17,16 @@ export default async function Gallery() {
     .max_results(30)
     .execute()) as { resources: SearchResult[] };
 
-  console.log(results);
+  const { folders: albumsList } = (await cloudinary.v2.api.root_folders()) as {
+    folders: FolderType[];
+  };
+
+  console.log(albumsList);
+  // console.log(results);
   return (
     <section>
       <ForceRefresh />
-      <FavouritesElm resources={results.resources} />
+      <FavouritesElm resources={results.resources} albumsList={albumsList} />
     </section>
   );
 }

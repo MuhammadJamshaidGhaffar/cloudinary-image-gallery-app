@@ -3,6 +3,7 @@ import UploadButton from "./UploadButton";
 import cloudinary from "cloudinary";
 import CloudinaryImage from "../../components/CloudinaryImage";
 import ImagesGrid from "@/components/ImagesGrid";
+import { FolderType } from "../albums/page";
 
 export type SearchResult = {
   public_id: string;
@@ -17,7 +18,12 @@ export default async function Gallery() {
     .max_results(30)
     .execute()) as { resources: SearchResult[] };
 
-  console.log(results);
+  const { folders: albumsList } = (await cloudinary.v2.api.root_folders()) as {
+    folders: FolderType[];
+  };
+
+  console.log(albumsList);
+  // console.log(results);
   return (
     <section>
       <div className="flex justify-between">
@@ -28,7 +34,11 @@ export default async function Gallery() {
         max_columns={4}
         images={results.resources}
         getImageComponent={(imageData) => (
-          <CloudinaryImage key={imageData.public_id} imageData={imageData} />
+          <CloudinaryImage
+            key={imageData.public_id}
+            imageData={imageData}
+            albumsList={albumsList}
+          />
         )}
       />
     </section>
