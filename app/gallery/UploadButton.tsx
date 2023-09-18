@@ -4,10 +4,24 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { useRouter } from "next/navigation";
 
-export default function UploadButton() {
+export default function UploadButton({
+  className,
+  variant,
+}: {
+  className?: string;
+  variant?:
+    | "default"
+    | "link"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | null
+    | undefined;
+}) {
   const router = useRouter();
   return (
-    <Button asChild>
+    <Button asChild className={className} variant={variant}>
       <CldUploadButton
         uploadPreset="xvkjgrct"
         onUpload={(result) => {

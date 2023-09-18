@@ -15,6 +15,8 @@ import { AddToAlbumDialog } from "./AddToAlbumDialog";
 import { SearchResult } from "@/app/favourites/page";
 import { useState } from "react";
 import { FolderType } from "@/app/albums/page";
+import EditIcon from "./icons/EditIcon";
+import { useRouter } from "next/navigation";
 
 export function ImageMenu({
   imageData,
@@ -26,6 +28,7 @@ export function ImageMenu({
   onAlbumChanged?: () => void;
 }) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   return (
     <div className="absolute top-2 right-2">
       <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -42,6 +45,21 @@ export function ImageMenu({
               onClose={() => setOpen(false)}
               onAlbumChanged={onAlbumChanged}
             />
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Button
+              variant="ghost"
+              className="w-full justify-start"
+              asChild
+              onClick={() => {
+                router.replace(`/edit?publicId=${imageData.public_id}`);
+              }}
+            >
+              <div className="flex gap-2 cursor-pointer">
+                <EditIcon />
+                <span>Edit</span>
+              </div>
+            </Button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

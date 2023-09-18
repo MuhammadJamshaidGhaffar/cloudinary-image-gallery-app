@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Sidebar } from "./SideBar";
 import Link from "next/link";
+import GalleryIcon from "@/components/icons/GalleryIcon";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,9 @@ export default function RootLayout({
         <div className="hidden flex-col md:flex">
           <div className="border-b">
             <div className="flex h-16 items-center px-4 container mx-auto">
-              <Link href="/">Image Gallery App</Link>
+              <Link href="/" className="flex gap-2">
+                <GalleryIcon /> Image Gallery App
+              </Link>
               <div className="ml-auto flex items-center space-x-4">
                 <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" />

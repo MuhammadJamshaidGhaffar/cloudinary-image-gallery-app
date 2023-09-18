@@ -44,10 +44,12 @@ export function AddToAlbumDialog({
       }}
     >
       <DialogTrigger asChild>
-        <div className="flex gap-2 cursor-pointer">
-          <FolderPlusIcon />
-          <span>Add to Album</span>
-        </div>
+        <Button variant="ghost" className="w-full justify-start" asChild>
+          <div className="flex gap-2 cursor-pointer">
+            <FolderPlusIcon />
+            <span>Add to Album</span>
+          </div>
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
